@@ -182,6 +182,17 @@ Start a new conversation (skills load at conversation start) and try prompts lik
 
 Skills activate automatically based on what you ask. You can also invoke a skill by mentioning its name directly in your message (e.g. "use adhd-daily-planner").
 
+### 4. Make it yours (optional)
+
+The skills work out of the box, but they get better when they know your patterns. There's a template you can fill in with your own dopamenu, energy patterns, and startup tricks:
+
+```bash
+# Copy the template into your CLAUDE.md (or create a new one)
+cat templates/my-settings.md >> CLAUDE.md
+```
+
+Then open `CLAUDE.md` and fill in your own items. The skills will pick up your preferences automatically in the next conversation.
+
 ## How It Works
 
 ```
