@@ -50,8 +50,8 @@ for skill in "${SKILLS[@]}"; do
   # Create skill directory
   mkdir -p ".claude/skills/${skill}"
 
-  # Download SKILL.md
-  curl -sL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/SKILL.md" \
+  # Download SKILL.md (-s: silent, -f: fail on HTTP errors, -L: follow redirects)
+  curl -sfL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/SKILL.md" \
     -o ".claude/skills/${skill}/SKILL.md"
 
   # Download reference files (if any)
@@ -59,7 +59,7 @@ for skill in "${SKILLS[@]}"; do
   if [ -n "$refs" ]; then
     mkdir -p ".claude/skills/${skill}/references"
     while IFS= read -r ref; do
-      curl -sL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/references/${ref}" \
+      curl -sfL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/references/${ref}" \
         -o ".claude/skills/${skill}/references/${ref}"
     done <<< "$refs"
   fi
@@ -87,14 +87,15 @@ BRANCH="main"
 for skill in "${SKILLS[@]}"; do
   mkdir -p "${TARGET_DIR}/${skill}"
 
-  curl -sL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/SKILL.md" \
+  # -s: silent, -f: fail on HTTP errors, -L: follow redirects
+  curl -sfL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/SKILL.md" \
     -o "${TARGET_DIR}/${skill}/SKILL.md"
 
   refs=$(gh api "repos/${REPO}/contents/.claude/skills/${skill}/references" --jq '.[].name' 2>/dev/null)
   if [ -n "$refs" ]; then
     mkdir -p "${TARGET_DIR}/${skill}/references"
     while IFS= read -r ref; do
-      curl -sL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/references/${ref}" \
+      curl -sfL "https://raw.githubusercontent.com/${REPO}/${BRANCH}/.claude/skills/${skill}/references/${ref}" \
         -o "${TARGET_DIR}/${skill}/references/${ref}"
     done <<< "$refs"
   fi
@@ -105,12 +106,15 @@ done
 
 ### Install a Single Skill
 
+> **Note:** This one-liner only downloads `SKILL.md`. Skills with a `references/` directory (e.g. `adhd-daily-planner`) will be missing those files. Use Option A or B above for a complete install.
+
 ```bash
 # Quick one-liner for a single skill (project-local):
 SKILL="adhd-daily-planner"
 REPO="curiositech/some_claude_skills"
 mkdir -p ".claude/skills/${SKILL}" && \
-curl -sL "https://raw.githubusercontent.com/${REPO}/main/.claude/skills/${SKILL}/SKILL.md" \
+# -s: silent, -f: fail on HTTP errors, -L: follow redirects
+curl -sfL "https://raw.githubusercontent.com/${REPO}/main/.claude/skills/${SKILL}/SKILL.md" \
   -o ".claude/skills/${SKILL}/SKILL.md"
 ```
 

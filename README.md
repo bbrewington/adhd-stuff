@@ -8,7 +8,7 @@ Agent skills are reusable instruction files that tell Claude "here is how to hel
 
 When you type a message in Claude Code, it checks whether any installed skill matches your request and activates the relevant one automatically. For example, if you have the `adhd-daily-planner` skill installed and ask Claude to "help me plan my day", it will use ADHD-specific strategies like the 3-Things System, time-blind-friendly scheduling, and transition buffers - instead of generic productivity advice.
 
-Skills live as files on your machine. Claude Code reads them at the start of each conversation. No API keys, no services, no accounts beyond what you already have.
+Skills live as files on your machine. Claude Code reads them at the start of each conversation. No extra API keys or third-party services — just your existing Anthropic account.
 
 If you've ever installed a browser extension or a VS Code extension, skills are similar - but they're just plain text files on your computer.
 
@@ -170,7 +170,7 @@ When Claude opens, paste this as your first message:
 Install the ADHD skills listed in AGENTS.md
 ```
 
-Then press Enter and wait while it runs through the install steps. This may take up to a minute - that's normal.
+Then press Enter and wait while it runs through the install steps. This may take up to a minute - that's normal. Claude may ask permission to run commands — click **Allow**.
 
 ### 3. Use it
 
@@ -180,7 +180,7 @@ Start a new conversation (skills load at conversation start) and try prompts lik
 - "Help me manage my three projects" (activates `project-management-guru-adhd`)
 - "I want to build an MVP for my side project" (activates `tech-entrepreneur-coach-adhd`)
 
-Skills activate automatically based on what you ask. You can also invoke them directly with `/skill-name`.
+Skills activate automatically based on what you ask. You can also invoke a skill by mentioning its name directly in your message (e.g. "use adhd-daily-planner").
 
 ## How It Works
 
