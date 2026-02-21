@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(adhd-daily-planner)",
+      "Skill(adhd-design-expert)",
+      "Skill(project-management-guru-adhd)",
+      "Skill(tech-entrepreneur-coach-adhd)",
+      "Skill(wisdom-accountability-coach)"
+    ]
+  }
+}
