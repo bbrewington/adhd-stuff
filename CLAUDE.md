@@ -10,6 +10,7 @@ Setup guide and configuration repo for ADHD-focused Claude Code agent skills. Sk
 - `AGENTS.md` - Skill catalog, install scripts, and reference for skill structure
 - `CLAUDE.md` - This file (instructions for Claude Code)
 - `templates/` - User-facing templates (dopamenu, energy patterns, etc.)
+- `scripts/` - SessionStart hook and install helpers
 - `.claude/skills/` - Installed skills (gitignored, not committed)
 
 ## Conventions

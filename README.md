@@ -12,7 +12,61 @@ Skills live as files on your machine. Claude Code reads them at the start of eac
 
 If you've ever installed a browser extension or a VS Code extension, skills are similar - but they're just plain text files on your computer.
 
-## Prerequisites
+## Choose Your Path
+
+There are two ways to use this. Pick whichever feels easier:
+
+| | **Web (browser)** | **CLI (terminal)** |
+|---|---|---|
+| **Best for** | Beginners, no install needed | Developers who already use the terminal |
+| **What you need** | A browser + GitHub account | Node.js, Git, GitHub CLI, Claude Code |
+| **Where it runs** | claude.ai/code | Your local machine |
+| **Setup time** | ~2 minutes | ~10 minutes (one-time installs) |
+
+## Quick Start: Web
+
+No terminal required. Everything happens in your browser.
+
+### 1. Fork this repo
+
+Go to [github.com/bbrewington/adhd-stuff](https://github.com/bbrewington/adhd-stuff) and click the **Fork** button in the top-right corner. This creates your own copy that you can customize.
+
+### 2. Open it in Claude Code on the web
+
+Go to [claude.ai/code](https://claude.ai/code). If this is your first time, you'll be asked to connect your GitHub account — follow the prompts.
+
+Once connected, select your forked copy of `adhd-stuff` from the repo list.
+
+### 3. Skills install automatically
+
+When the session starts, a setup script runs in the background and downloads the ADHD skills. You don't need to do anything — just wait a few seconds for it to finish.
+
+### 4. Try it
+
+Send a message like:
+- "Help me plan my day"
+- "I'm overwhelmed and can't start anything"
+- "Help me manage my three projects"
+- "I want to build an MVP for my side project"
+
+Skills activate automatically based on what you ask.
+
+### 5. Make it yours
+
+The skills work out of the box, but they get better when they know your patterns. Ask Claude:
+
+```text
+Help me fill in my dopamenu and energy patterns using the template in templates/my-settings.md
+```
+
+Claude will read the template and walk you through it — asking about your preferred recharge activities, your peak focus times, what actually gets you started on tasks, etc. When you're done, it will save your answers into `CLAUDE.md` so the skills use them automatically.
+
+---
+
+## Quick Start: CLI
+
+<details>
+<summary>Prerequisites (expand for install steps)</summary>
 
 You'll need a few things installed before getting started. Don't worry if some of these words are new. You'll only install each tool once, and you can copy-paste every command.
 
@@ -25,9 +79,6 @@ You'll need a few things installed before getting started. Don't worry if some o
 
 - **Node.js** - required by Claude Code
 - **Git** - to download this repo
-- **GitHub CLI** (`gh`) - used by the install scripts
-
-Expand any section below for step-by-step install instructions.
 
 <details>
 <summary>New to the terminal? Start here</summary>
@@ -105,27 +156,6 @@ sudo dnf install git        # Fedora
 </details>
 
 <details>
-<summary>How to install the GitHub CLI</summary>
-
-The GitHub CLI lets you interact with GitHub from your terminal. The skill install scripts use it to discover which files each skill includes.
-
-**Install:**
-```bash
-brew install gh              # Mac
-winget install GitHub.cli    # Windows
-sudo apt install gh          # Ubuntu/Debian
-```
-See [cli.github.com](https://cli.github.com/) for other options.
-
-**Then authenticate (one-time setup):**
-```bash
-gh auth login
-```
-Follow the prompts - it will open a browser to log in to your GitHub account. When it's done, you should see a line like `Logged in as your_username`.
-
-</details>
-
-<details>
 <summary>How to install Claude Code</summary>
 
 Claude Code is Anthropic's command-line tool for working with Claude. It's what reads and runs the skills.
@@ -147,7 +177,7 @@ If you prefer not to install Node.js, there are also standalone install options 
 
 </details>
 
-## Quick Start
+</details>
 
 ### 1. Clone this repo
 
@@ -158,21 +188,21 @@ cd adhd-stuff
 
 ### 2. Install skills
 
-Open Claude Code in this directory:
+Skills install automatically when you start a session (via a SessionStart hook). Just open Claude Code:
 
 ```bash
 claude
 ```
 
-When Claude opens, paste this as your first message:
+You'll see a message like "Installed 7 skill(s)" — that means it worked. If the skills were already downloaded from a previous session, it skips the download.
 
-```text
-Install the ADHD skills listed in AGENTS.md
+You can also run the script directly at any time:
+
+```bash
+bash scripts/install-skills.sh
 ```
 
-Then press Enter and wait while it runs through the install steps. This may take up to a minute - that's normal. Claude may ask permission to run commands — click **Allow**.
-
-### 3. Use it
+### 3. Try it
 
 Start a new conversation (skills load at conversation start) and try prompts like:
 - "Help me plan my day" (activates `adhd-daily-planner`)
@@ -187,11 +217,16 @@ Skills activate automatically based on what you ask. You can also invoke a skill
 The skills work out of the box, but they get better when they know your patterns. There's a template you can fill in with your own dopamenu, energy patterns, and startup tricks:
 
 ```bash
-# Copy the template into your CLAUDE.md (or create a new one)
 cat templates/my-settings.md >> CLAUDE.md
 ```
 
 Then open `CLAUDE.md` and fill in your own items. The skills will pick up your preferences automatically in the next conversation.
+
+Or, if you'd rather not edit markdown by hand, ask Claude:
+
+```text
+Help me fill in my dopamenu and energy patterns using the template in templates/my-settings.md
+```
 
 ## How It Works
 
@@ -239,5 +274,8 @@ Skills add context to your conversations, so they increase token usage slightly.
 **Can I use skills without this repo?**
 Absolutely. This repo is just a setup guide. You can install skills into any project's `.claude/skills/` directory or globally into `~/.claude/skills/`.
 
+**Do skills persist between web sessions?**
+On the web, skills are re-downloaded automatically at the start of each session (via a SessionStart hook). Your personalized settings in `CLAUDE.md` are saved in your fork, so those persist.
+
 **What if this all feels like too much?**
-Start with just one thing: get Claude Code installed and working. Once you can run `claude` and have a chat, come back and do the repo clone and skill install. You can do this in small chunks.
+If you're using the web path: just fork the repo, open it in claude.ai/code, and start talking. Everything else happens automatically. If you're using the CLI: start with just getting `claude` installed and running. You can do this in small chunks.
