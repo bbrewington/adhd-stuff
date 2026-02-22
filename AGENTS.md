@@ -27,7 +27,19 @@ These pair well with the ADHD skills above:
 
 ## Installation
 
-### Option A: Project-Local Install (Recommended)
+### Automatic (SessionStart hook)
+
+Skills install automatically when you start a Claude Code session — both on the web (claude.ai/code) and in the CLI. A [SessionStart hook](https://docs.anthropic.com/en/docs/claude-code/hooks) in `.claude/settings.json` runs `scripts/install-skills.sh`, which downloads skills from the upstream repo. The script is idempotent: it skips any skill that's already present.
+
+You can also run it manually at any time:
+
+```bash
+bash scripts/install-skills.sh
+```
+
+The manual install options below are still available if you want to customize which skills are installed or install them globally.
+
+### Option A: Project-Local Install
 
 Installs skills into this repo's `.claude/skills/` directory. They'll be available whenever you open this project in Claude Code.
 

@@ -7,5 +7,18 @@
       "Skill(tech-entrepreneur-coach-adhd)",
       "Skill(wisdom-accountability-coach)"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/install-skills.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
