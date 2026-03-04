@@ -4,6 +4,16 @@ Setup guide for installing Claude Code agent skills into this project.
 
 ## Skills
 
+### Local Skills (this repo)
+
+These skills are maintained in this repo at `.claude/skills/` and are not installed from upstream. They use `references/` files version-controlled here.
+
+| Skill | Invoke | Description |
+|-------|--------|-------------|
+| `adhd-coach` | `/adhd-coach` | In-the-moment coaching using psychoeducation frameworks (Shame Cycle, Dopamenu, HALT, Eisenhower, etc.). Asks what's going on, identifies the pattern, applies the right framework. |
+
+### Upstream Skills (curiositech/some_claude_skills)
+
 These skills come from [curiositech/some_claude_skills](https://github.com/curiositech/some_claude_skills) and are designed for ADHD-friendly workflows.
 
 ### ADHD-Focused Skills
